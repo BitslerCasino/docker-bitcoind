@@ -19,3 +19,8 @@ docker run -v bitcoind-data:/bitcoin --name=bitcoind-node -d \
       -v /home/user/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf \
       unibtc/docker-bitcoind
 ```
+
+Check Logs
+```
+docker logs -f bitcoind-node
+ ```
