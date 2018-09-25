@@ -1,3 +1,5 @@
+## Moved to https://github.com/BitslerCasino/docker-bitcoind
+
 # docker-bitcoind
 Docker Image for Bitcoin Core
 
