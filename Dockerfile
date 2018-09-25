@@ -43,7 +43,7 @@ EXPOSE 8332 8333
 WORKDIR /bitcoin
 
 COPY entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["btc_oneshot"]
 
