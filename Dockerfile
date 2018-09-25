@@ -6,13 +6,10 @@ ENV USER_ID 1000
 ENV GROUP_ID 1000
 
 RUN groupadd -g ${GROUP_ID} bitcoin \
-  && useradd -u ${USER_ID} -g bitcoin -s /bin/bash -m -d /bitcoin bitcoin
-
-
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C70EF1F0305A1ADB9986DBD8D46F45428842CE5E && \
-  echo "deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu xenial main" > /etc/apt/sources.list.d/bitcoin.list
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+  && useradd -u ${USER_ID} -g bitcoin -s /bin/bash -m -d /bitcoin bitcoin && \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C70EF1F0305A1ADB9986DBD8D46F45428842CE5E && \
+  echo "deb http://ppa.launchpad.net/bitcoin/bitcoin/ubuntu xenial main" > /etc/apt/sources.list.d/bitcoin.list && \
+  apt-get update && apt-get install -y --no-install-recommends \
   bitcoind \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -35,6 +32,7 @@ RUN set -x \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD ./bin /usr/local/bin
+RUN chmod +x /usr/local/bin/btc_oneshot
 
 VOLUME ["/bitcoin"]
 
@@ -43,6 +41,7 @@ EXPOSE 8332 8333
 WORKDIR /bitcoin
 
 COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD ["btc_oneshot"]
