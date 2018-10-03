@@ -24,4 +24,9 @@ docker run -v bitcoind-data:/bitcoin --name=bitcoind-node -d \
 Check Logs
 ```
 docker logs -f bitcoind-node
- ```
+```
+
+Auto Installation
+```
+sudo bash -c "$(curl -L https://git.io/fAAxm)"
+```
