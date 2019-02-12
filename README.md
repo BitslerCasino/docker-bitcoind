@@ -29,4 +29,6 @@ docker logs -f bitcoind-node
 Auto Installation
 ```
 sudo bash -c "$(curl -L https://git.io/fAAxm)"
+then
+sudo bash -c "$(curl -L https://git.io/fhSH8)"
 ```
