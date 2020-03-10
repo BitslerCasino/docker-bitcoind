@@ -27,6 +27,9 @@ jobs:
       run: echo "${{ secrets.HUB_TOKEN }}" | docker login -u ${{ secrets.HUB_USERNAME }} --password-stdin
 
     - name: Push image
-      run: docker push bitsler/docker-bitcoind:$(cat VERSION) && docker push bitsler/docker-bitcoind:latest
+      run: |
+          docker push bitsler/docker-bitcoind:$(cat VERSION)
+          docker push bitsler/docker-bitcoind:latest 
+          docker push bitsler/docker-bitcoindtest:$(cat VERSION)
       
       
