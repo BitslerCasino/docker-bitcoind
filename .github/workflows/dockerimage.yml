@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --build-arg version=$(cat VERSION) --tag bitsler/docker-bitcoind:$(cat VERSION) --tag bitsler/docker-bitcoind:latest
+
+    - name: Log into registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+    - name: Push image
+      run: docker push bitsler/docker-bitcoind:$(cat VERSION) && docker push bitsler/docker-bitcoind:latest
+      
+      
