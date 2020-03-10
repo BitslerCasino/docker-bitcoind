@@ -16,7 +16,13 @@ jobs:
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --build-arg version=$(cat VERSION) --tag bitsler/docker-bitcoind:$(cat VERSION) --tag bitsler/docker-bitcoind:latest
-
+    
+    - name: Build the Docker Testnet image
+      run: |
+          cp Dockerfile DockerfileTest
+          sed 's/8332 8333/18332 18333/g' DockerfileTest
+          docker build . --file DockerfileTest --build-arg version=$(cat VERSION) --tag bitsler/docker-bitcoindtest:$(cat VERSION)
+    
     - name: Log into registry
       run: echo "${{ secrets.HUB_TOKEN }}" | docker login -u ${{ secrets.HUB_USERNAME }} --password-stdin
 
