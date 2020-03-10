@@ -12,7 +12,8 @@ RUN groupadd -g ${GROUP_ID} bitcoin \
   && apt-get install -y curl gosu \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV BITCOIN_VERSION=0.18.1
+ARG version=0.18.1
+ENV BITCOIN_VERSION=$version
 
 RUN curl -sL https://bitcoincore.org/bin/bitcoin-core-$BITCOIN_VERSION/bitcoin-$BITCOIN_VERSION-x86_64-linux-gnu.tar.gz | tar xz --strip=2 -C /usr/local/bin
 
