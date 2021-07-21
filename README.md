@@ -18,7 +18,7 @@ docker run -v bitcoind-data:/bitcoin --name=bitcoind-node -d \
       -p 8333:8333 \
       -p 8332:8332 \
       -v /home/$USER/.btcdocker/bitcoin.conf:/bitcoin/.bitcoin/bitcoin.conf \
-      unibtc/docker-bitcoind
+      bitsler/docker-bitcoind
 ```
 
 Check Logs
